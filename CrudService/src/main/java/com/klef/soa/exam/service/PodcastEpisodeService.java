@@ -1,0 +1,31 @@
+package com.klef.soa.exam.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.klef.soa.exam.entity.PodcastEpisode;
+import com.klef.soa.exam.repository.PodcastEpisodeRepository;
+
+@Service
+public class PodcastEpisodeService {
+
+private final PodcastEpisodeRepository repository;
+public PodcastEpisodeService(PodcastEpisodeRepository repository) {
+    this.repository = repository;
+}
+public PodcastEpisode addEpisode(PodcastEpisode episode) {
+    return repository.save(episode);
+}
+public List<PodcastEpisode> displayAllEpisodes() {
+    return repository.findAll();
+}
+public boolean deleteEpisode(Long id) {
+    if (repository.existsById(id)) {
+        repository.deleteById(id);
+        return true;
+    }
+    return false;
+}
+
+}
